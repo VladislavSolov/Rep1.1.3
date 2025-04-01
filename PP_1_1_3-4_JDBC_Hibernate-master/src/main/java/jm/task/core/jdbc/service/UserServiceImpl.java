@@ -9,49 +9,55 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
+    private UserDao userDao = new UserDaoJDBCImpl();
+
 
     public UserServiceImpl() throws SQLException {
-        this.userDaoJDBC = new UserDaoJDBCImpl();
+        this.userDao = new UserDaoJDBCImpl();
     }
 
+    @Override
     public void createUsersTable() throws SQLException {
-        userDaoJDBC.createUsersTable();
+        userDao.createUsersTable();
     }
 
+    @Override
     public void dropUsersTable() throws SQLException {
-        userDaoJDBC.dropUsersTable();
+        userDao.dropUsersTable();
     }
 
+    @Override
     public void saveUser(String name, String lastName, byte age) {
         try {
-            userDaoJDBC.saveUser(name, lastName, age);
+            userDao.saveUser(name, lastName, age);
+            System.out.println("User " + name + " " + lastName + " успешно добавлен ");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @Override
     public void removeUserById(long id) {
         try {
-            userDaoJDBC.removeUserById(id);
+            userDao.removeUserById(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @Override
     public List<User> getAllUsers() {
-
         try {
-            return userDaoJDBC.getAllUsers();
+            return userDao.getAllUsers();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @Override
     public void cleanUsersTable() {
-
         try {
-            userDaoJDBC.cleanUsersTable();
+            userDao.cleanUsersTable();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
