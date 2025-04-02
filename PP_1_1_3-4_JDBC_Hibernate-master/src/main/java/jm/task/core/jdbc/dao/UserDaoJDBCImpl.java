@@ -11,7 +11,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     private Connection connection = null;
 
-    public UserDaoJDBCImpl() throws SQLException {
+    public UserDaoJDBCImpl()  {
         this.connection = Util.getConnection();
     }
 

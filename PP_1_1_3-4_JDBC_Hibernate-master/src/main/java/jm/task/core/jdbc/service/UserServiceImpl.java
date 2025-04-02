@@ -4,62 +4,50 @@ import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
 
-import java.sql.SQLException;
+
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private UserDao userDao = new UserDaoJDBCImpl();
+   private UserDao userDao = new UserDaoJDBCImpl();
 
-
-    public UserServiceImpl() throws SQLException {
-        this.userDao = new UserDaoJDBCImpl();
-    }
+   public UserServiceImpl() {
+   }
 
     @Override
-    public void createUsersTable() throws SQLException {
+    public void createUsersTable() {
         userDao.createUsersTable();
     }
 
     @Override
-    public void dropUsersTable() throws SQLException {
+    public void dropUsersTable() {
         userDao.dropUsersTable();
     }
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        try {
-            userDao.saveUser(name, lastName, age);
-            System.out.println("User " + name + " " + lastName + " успешно добавлен ");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        userDao.saveUser(name, lastName, age);
+        System.out.println("User " + name + " " + lastName + " успешно добавлен ");
+
     }
 
     @Override
     public void removeUserById(long id) {
-        try {
-            userDao.removeUserById(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        userDao.removeUserById(id);
     }
+
 
     @Override
     public List<User> getAllUsers() {
-        try {
-            return userDao.getAllUsers();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return userDao.getAllUsers();
+
     }
 
     @Override
     public void cleanUsersTable() {
-        try {
-            userDao.cleanUsersTable();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        userDao.cleanUsersTable();
+
     }
 }
